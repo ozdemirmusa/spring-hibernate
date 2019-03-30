@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+
+	<bean id="dataSourceId"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/deneme" />
+		<property name="username" value="root" />
+		<property name="password" value="Carolina" />
+	</bean>
+
+
+	<bean id="sessionFactoryId"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
+		<property name="dataSource" ref="dataSourceId" />
+		<property name="packagesToScan" value="model" />
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+			</props>
+		</property>
+
+	</bean>
+	<context:component-scan base-package="dao" />
+</beans>
